@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotating Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+   <div class="main-container">
+    <div class="hub-center">
+    <div class="hub-inner" id="hub-text"></div>
+</div>
+
+    <div class="spoke-container">
+        <a href="https://pureesperanza.org/shop-education/" class="spoke" data-name="EDUCATION"><i class="fa-solid fa-graduation-cap"></i></a>
+        <a href="https://pureesperanza.org/shop-healing/" class="spoke" data-name="HEALING"><i class="fa-solid fa-heart-pulse"></i></a>
+        <a href="https://pureesperanza.org/shop-arts/" class="spoke" data-name="ARTS"><i class="fa-solid fa-palette"></i></a>
+        <a href="https://pureesperanza.org/shop-business/" class="spoke" data-name="BUSINESS"><i class="fa-solid fa-briefcase"></i></a>
+        <a href="https://pureesperanza.org/shop-enviornment/" class="spoke" data-name="ENVIRONMENT"><i class="fa-solid fa-leaf"></i></a>
+        <a href="https://pureesperanza.org/shop-social-global-awareness/" class="spoke" data-name="GLOBAL"><i class="fa-solid fa-earth-americas"></i></a>
+    </div>
+</div>
+
+<script>
+    const hubText = document.getElementById('hub-text');
+    const spokes = document.querySelectorAll('.spoke');
+
+    spokes.forEach(spoke => {
+        spoke.addEventListener('mouseenter', () => {
+            const name = spoke.getAttribute('data-name');
+            hubText.innerText = name;
+        });
+
+        spoke.addEventListener('mouseleave', () => {
+            hubText.innerText = '';
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+/* 1. Reset and Center */
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: transparent;
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+.main-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+}
+
+/* 2. Central Hub */
+.hub-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* Increase these from 100px */
+    width: 400px; 
+    height: 400px; 
+    
+    background: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    border-radius: 50%;
+    border: 5px solid rgba(0, 0, 0, 0.409);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Make the text bigger to match */
+    font-size: 30px; 
+    font-weight: bold;
+    
+    z-index: 1;
+    box-shadow: 0 0 30px rgba(255,255,255,0.3);
+}
+.hub-center {
+    /* ... existing code ... */
+    pointer-events: none; /* This tells the mouse to "click through" the white circle to the icons underneath */
+}
+.hub-center {
+    /* ... your other code ... */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hub-center:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 0 50px rgb(0, 0, 0);
+}
+.hub-inner {
+    width: 70%;       /* It will be 70% the size of the main hub */
+    height: 70%;
+    background: rgba(255, 217, 1, 0.671); /* Semi-transparent white */
+    border: 2px solid rgb(0, 0, 0); /* A subtle ring */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2); /* Makes it look "carved in" */
+    pointer-events: none; /* Important: mouse still clicks through to icons */
+    /* This creates a crisp black outline */
+    text-shadow: 
+        -1px -1px 0 #000,  
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+}
+
+/* 3. The container that rotates */
+.spoke-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: rotate-hub 20s linear infinite;
+    z-index: 10;
+}
+
+/* 4. The Spoke (Outer Circles) */
+.spoke {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    margin-top: -60px; /* Half of height */
+    margin-left: -60px; /* Half of width */
+    background: #00d5ff77;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 11px;
+    font-weight: bold;
+    z-index: 10;
+    border: 3px solid rgb(0, 0, 0); /* Adds the black outline */
+    box-sizing: border-box;  /* Keeps the circle size exactly 120px */
+}
+
+/* 5. Positioning and Counter-Rotation */
+/* We wrap the counter-rotation inside the nth-child to keep them separated */
+/* Each child now gets its own position AND its own color */
+
+.spoke:nth-child(1) { 
+    transform: rotate(0deg) translate(200px) rotate(0deg); 
+    animation: rotate-icon-1 20s linear infinite;
+    background: #9500ff97; /* Education - Green */
+}
+
+.spoke:nth-child(2) { 
+    transform: rotate(60deg) translate(200px) rotate(-60deg); 
+    animation: rotate-icon-2 20s linear infinite;
+    background: #ff0059a5; /* Healing - Red */
+}
+
+.spoke:nth-child(3) { 
+    transform: rotate(120deg) translate(200px) rotate(-120deg); 
+    animation: rotate-icon-3 20s linear infinite;
+    background: #ff00f2a3; /* Arts - Purple */
+}
+
+.spoke:nth-child(4) { 
+    transform: rotate(180deg) translate(200px) rotate(-180deg); 
+    animation: rotate-icon-4 20s linear infinite;
+    background: #ff9900a5; /* Business - Orange */
+}
+
+.spoke:nth-child(5) { 
+    transform: rotate(240deg) translate(200px) rotate(-240deg); 
+    animation: rotate-icon-5 20s linear infinite;
+    background: #89ff03a4; /* Environment - Light Green */
+}
+
+.spoke:nth-child(6) { 
+    transform: rotate(300deg) translate(200px) rotate(-300deg); 
+    animation: rotate-icon-6 20s linear infinite;
+    background: #008cffac; /* Global - Blue */
+}
+/* 6. Orbit Animation */
+@keyframes rotate-hub {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 7. Unique Counter-Rotations (to keep each icon upright) */
+@keyframes rotate-icon-1 { from { transform: rotate(0deg) translate(200px) rotate(0deg); } to { transform: rotate(0deg) translate(200px) rotate(-360deg); } }
+@keyframes rotate-icon-2 { from { transform: rotate(60deg) translate(200px) rotate(-60deg); } to { transform: rotate(60deg) translate(200px) rotate(-420deg); } }
+@keyframes rotate-icon-3 { from { transform: rotate(120deg) translate(200px) rotate(-120deg); } to { transform: rotate(120deg) translate(200px) rotate(-480deg); } }
+@keyframes rotate-icon-4 { from { transform: rotate(180deg) translate(200px) rotate(-180deg); } to { transform: rotate(180deg) translate(200px) rotate(-540deg); } }
+@keyframes rotate-icon-5 { from { transform: rotate(240deg) translate(200px) rotate(-240deg); } to { transform: rotate(240deg) translate(200px) rotate(-600deg); } }
+@keyframes rotate-icon-6 { from { transform: rotate(300deg) translate(200px) rotate(-300deg); } to { transform: rotate(300deg) translate(200px) rotate(-660deg); } }
+
+/* 8. Pause on Hover - This pauses the big wheel AND the individual icons */
+.main-container:hover .spoke-container,
+.main-container:hover .spoke {
+    animation-play-state: paused;
+}
+.spoke:hover {
+    background-color: #ff007b; 
+    /* We use 'scale' instead of 'transform: scale' */
+    scale: 1.2;                
+    box-shadow: 0 0 30px #ff007b; 
+    transition: all 0.8s ease;  
+    z-index: 20; /* This ensures the hovered icon stays on top of others */
+}
+.spoke i {
+    font-size: 60px; /* Makes the icons larger */
+    color: rgb(0, 0, 0);    /* Ensures they are white */
+}
+.spoke:hover i {
+    color: #ffffff; /* Change this to any color you like */
+    transition: color 0.8s ease; /* Makes the color swap smooth */
+}
