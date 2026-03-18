@@ -1,3 +1,9 @@
+/* 0. Variable "Remote Control" */
+:root {
+    /* Changing this one value now updates all animations and positions! */
+    --orbit-distance: 30vmin; 
+}
+
 /* 1. Reset and Center */
 body {
     margin: 0;
@@ -5,73 +11,72 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: transparent;
+    /* A soft grey-to-white gradient */
+    background: radial-gradient(circle, rgba(255, 217, 0, 0.477) 0%, rgba(254, 255, 255, 0) 70%);
     font-family: sans-serif;
     overflow: hidden;
 }
 
 .main-container {
     position: relative;
-    width: 500px;
-    height: 500px;
+    width: 100%;
+    height: 100%;
 }
 
-/* 2. Central Hub */
+/* 2. Central Hub (Merged all blocks into one) */
 .hub-center {
     position: absolute;
     top: 50%;
     left: 50%;
+    /* Combines the center positioning and the hover transition */
     transform: translate(-50%, -50%);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     
-    /* Increase these from 100px */
-    width: 400px; 
-    height: 400px; 
+    /* viewport sizing */
+    width: 55vmin; 
+    height: 55vmin;
     
-    background: rgb(255, 255, 255);
-    color: rgb(255, 255, 255);
+    background: rgba(255, 226, 2, 0.549);
     border-radius: 50%;
     border: 5px solid rgba(0, 0, 0, 0.409);
     display: flex;
     justify-content: center;
     align-items: center;
     
-    /* Make the text bigger to match */
-    font-size: 30px; 
-    font-weight: bold;
-    
     z-index: 1;
     box-shadow: 0 0 30px rgba(255,255,255,0.3);
-}
-.hub-center {
-    /* ... existing code ... */
-    pointer-events: none; /* This tells the mouse to "click through" the white circle to the icons underneath */
-}
-.hub-center {
-    /* ... your other code ... */
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* Crucial: lets mouse "click through" to the orbitals underneath */
+    pointer-events: none; 
 }
 
 .hub-center:hover {
+    /* Scale up slightly on hover while staying centered */
     transform: translate(-50%, -50%) scale(1.05);
     box-shadow: 0 0 50px rgb(0, 0, 0);
 }
+
+/* 2b. The Inner Hub (Where the text lives) */
 .hub-inner {
-    width: 70%;       /* It will be 70% the size of the main hub */
-    height: 70%;
-    background: rgba(255, 217, 1, 0.671); /* Semi-transparent white */
-    border: 2px solid rgb(0, 0, 0); /* A subtle ring */
+    width: 75%;       
+    height: 75%;
+    background: rgba(0, 0, 0, 0.852); /* PureEsperanza Yellow */
+    border: 2px solid rgb(0, 0, 0); 
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2); /* Makes it look "carved in" */
-    pointer-events: none; /* Important: mouse still clicks through to icons */
-    /* This creates a crisp black outline */
-    text-shadow: 
-        -1px -1px 0 #000,  
-         1px -1px 0 #000,
-        -1px  1px 0 #000,
-         1px  1px 0 #000;
+    
+    /* Text Styling */
+    color: white;
+    font-size: 5vmin;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+    /* Outline for readability */
+    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
 }
 
 /* 3. The container that rotates */
@@ -88,95 +93,79 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 120px;
-    height: 120px;
-    margin-top: -60px; /* Half of height */
-    margin-left: -60px; /* Half of width */
-    background: #00d5ff77;
+    width: 16vmin;
+    height: 16vmin;
+    /* Using margin-top/left to center based on 16vmin height/width */
+    margin-top: -8vmin; 
+    margin-left: -8vmin; 
+    
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: rgb(0, 0, 0);
-    font-size: 11px;
-    font-weight: bold;
     z-index: 10;
-    border: 3px solid rgb(0, 0, 0); /* Adds the black outline */
-    box-sizing: border-box;  /* Keeps the circle size exactly 120px */
+    border: 3px solid rgb(0, 0, 0); 
+    box-sizing: border-box;  /* Ensures border doesn't grow the circle */
+    transition: all 0.5s ease;
 }
 
-/* 5. Positioning and Counter-Rotation */
-/* We wrap the counter-rotation inside the nth-child to keep them separated */
-/* Each child now gets its own position AND its own color */
-
-.spoke:nth-child(1) { 
-    transform: rotate(0deg) translate(200px) rotate(0deg); 
-    animation: rotate-icon-1 20s linear infinite;
-    background: #9500ff97; /* Education - Green */
+.spoke i {
+    font-size: 7vmin; /* Scalable icon size */
+    color: rgba(0, 0, 0, 0.699);    
 }
 
-.spoke:nth-child(2) { 
-    transform: rotate(60deg) translate(200px) rotate(-60deg); 
-    animation: rotate-icon-2 20s linear infinite;
-    background: #ff0059a5; /* Healing - Red */
-}
+/* 5. Positioning (Now using var for distance) */
+.spoke:nth-child(1) { transform: rotate(0deg) translate(var(--orbit-distance)) rotate(0deg); animation: rotate-icon-1 20s linear infinite; background: #9500ff97; }
+.spoke:nth-child(2) { transform: rotate(60deg) translate(var(--orbit-distance)) rotate(-60deg); animation: rotate-icon-2 20s linear infinite; background: #ff0059a5; }
+.spoke:nth-child(3) { transform: rotate(120deg) translate(var(--orbit-distance)) rotate(-120deg); animation: rotate-icon-3 20s linear infinite; background: #ff00f2a3; }
+.spoke:nth-child(4) { transform: rotate(180deg) translate(var(--orbit-distance)) rotate(-180deg); animation: rotate-icon-4 20s linear infinite; background: #ff9900a5; }
+.spoke:nth-child(5) { transform: rotate(240deg) translate(var(--orbit-distance)) rotate(-240deg); animation: rotate-icon-5 20s linear infinite; background: #89ff03a4; }
+.spoke:nth-child(6) { transform: rotate(300deg) translate(var(--orbit-distance)) rotate(-300deg); animation: rotate-icon-6 20s linear infinite; background: #008cffac; }
 
-.spoke:nth-child(3) { 
-    transform: rotate(120deg) translate(200px) rotate(-120deg); 
-    animation: rotate-icon-3 20s linear infinite;
-    background: #ff00f2a3; /* Arts - Purple */
-}
-
-.spoke:nth-child(4) { 
-    transform: rotate(180deg) translate(200px) rotate(-180deg); 
-    animation: rotate-icon-4 20s linear infinite;
-    background: #ff9900a5; /* Business - Orange */
-}
-
-.spoke:nth-child(5) { 
-    transform: rotate(240deg) translate(200px) rotate(-240deg); 
-    animation: rotate-icon-5 20s linear infinite;
-    background: #89ff03a4; /* Environment - Light Green */
-}
-
-.spoke:nth-child(6) { 
-    transform: rotate(300deg) translate(200px) rotate(-300deg); 
-    animation: rotate-icon-6 20s linear infinite;
-    background: #008cffac; /* Global - Blue */
-}
 /* 6. Orbit Animation */
 @keyframes rotate-hub {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
 
-/* 7. Unique Counter-Rotations (to keep each icon upright) */
-@keyframes rotate-icon-1 { from { transform: rotate(0deg) translate(200px) rotate(0deg); } to { transform: rotate(0deg) translate(200px) rotate(-360deg); } }
-@keyframes rotate-icon-2 { from { transform: rotate(60deg) translate(200px) rotate(-60deg); } to { transform: rotate(60deg) translate(200px) rotate(-420deg); } }
-@keyframes rotate-icon-3 { from { transform: rotate(120deg) translate(200px) rotate(-120deg); } to { transform: rotate(120deg) translate(200px) rotate(-480deg); } }
-@keyframes rotate-icon-4 { from { transform: rotate(180deg) translate(200px) rotate(-180deg); } to { transform: rotate(180deg) translate(200px) rotate(-540deg); } }
-@keyframes rotate-icon-5 { from { transform: rotate(240deg) translate(200px) rotate(-240deg); } to { transform: rotate(240deg) translate(200px) rotate(-600deg); } }
-@keyframes rotate-icon-6 { from { transform: rotate(300deg) translate(200px) rotate(-300deg); } to { transform: rotate(300deg) translate(200px) rotate(-660deg); } }
+/* 7. Unique Counter-Rotations (Using var(--orbit-distance) for responsiveness) */
+@keyframes rotate-icon-1 { from { transform: rotate(0deg) translate(var(--orbit-distance)) rotate(0deg); } to { transform: rotate(0deg) translate(var(--orbit-distance)) rotate(-360deg); } }
+@keyframes rotate-icon-2 { from { transform: rotate(60deg) translate(var(--orbit-distance)) rotate(-60deg); } to { transform: rotate(60deg) translate(var(--orbit-distance)) rotate(-420deg); } }
+@keyframes rotate-icon-3 { from { transform: rotate(120deg) translate(var(--orbit-distance)) rotate(-120deg); } to { transform: rotate(120deg) translate(var(--orbit-distance)) rotate(-480deg); } }
+@keyframes rotate-icon-4 { from { transform: rotate(180deg) translate(var(--orbit-distance)) rotate(-180deg); } to { transform: rotate(180deg) translate(var(--orbit-distance)) rotate(-540deg); } }
+@keyframes rotate-icon-5 { from { transform: rotate(240deg) translate(var(--orbit-distance)) rotate(-240deg); } to { transform: rotate(240deg) translate(var(--orbit-distance)) rotate(-600deg); } }
+@keyframes rotate-icon-6 { from { transform: rotate(300deg) translate(var(--orbit-distance)) rotate(-300deg); } to { transform: rotate(300deg) translate(var(--orbit-distance)) rotate(-660deg); } }
 
-/* 8. Pause on Hover - This pauses the big wheel AND the individual icons */
-.main-container:hover .spoke-container,
-.main-container:hover .spoke {
+/* 8. Interaction State */
+
+/* NEW LOGIC: We only pause the container IF one of the spokes is hovered.
+   This prevents the 'invisible box' from pausing the animation early.
+*/
+.spoke-container:has(.spoke:hover) {
     animation-play-state: paused;
 }
+
+/* Also pause the individual spoke animations when ANY spoke is hovered */
+.spoke-container:has(.spoke:hover) .spoke {
+    animation-play-state: paused;
+}
+
+/* Individual Spoke Hover Styles */
 .spoke:hover {
-    background-color: #ff007b; 
-    /* We use 'scale' instead of 'transform: scale' */
+    background-color: #ff007b !important; 
     scale: 1.2;                
     box-shadow: 0 0 30px #ff007b; 
-    transition: all 0.8s ease;  
-    z-index: 20; /* This ensures the hovered icon stays on top of others */
+    transition: all 0.5s ease;  
+    z-index: 50; 
 }
-.spoke i {
-    font-size: 60px; /* Makes the icons larger */
-    color: rgb(0, 0, 0);    /* Ensures they are white */
-}
+
+/* Keep icons level and white on hover */
 .spoke:hover i {
-    color: #ffffff; /* Change this to any color you like */
-    transition: color 0.8s ease; /* Makes the color swap smooth */
+    color: #ffffff;
+    transform: scale(1.1);
+    transition: all 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
