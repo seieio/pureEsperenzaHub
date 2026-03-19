@@ -12,7 +12,7 @@ body {
     align-items: center;
     height: 100vh;
     /* A soft grey-to-white gradient */
-    background: radial-gradient(circle, rgba(255, 217, 0, 0.477) 0%, rgba(254, 255, 255, 0) 70%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0) 0%, rgba(254, 255, 255, 0) 70%);
     font-family: sans-serif;
     overflow: hidden;
 }
@@ -36,7 +36,7 @@ body {
     width: 55vmin; 
     height: 55vmin;
     
-    background: rgba(255, 226, 2, 0.549);
+    background: rgb(255, 255, 255);
     border-radius: 50%;
     border: 5px solid rgba(0, 0, 0, 0.409);
     display: flex;
@@ -116,12 +116,12 @@ body {
 }
 
 /* 5. Positioning (Now using var for distance) */
-.spoke:nth-child(1) { transform: rotate(0deg) translate(var(--orbit-distance)) rotate(0deg); animation: rotate-icon-1 20s linear infinite; background: #9500ff97; }
-.spoke:nth-child(2) { transform: rotate(60deg) translate(var(--orbit-distance)) rotate(-60deg); animation: rotate-icon-2 20s linear infinite; background: #ff0059a5; }
-.spoke:nth-child(3) { transform: rotate(120deg) translate(var(--orbit-distance)) rotate(-120deg); animation: rotate-icon-3 20s linear infinite; background: #ff00f2a3; }
-.spoke:nth-child(4) { transform: rotate(180deg) translate(var(--orbit-distance)) rotate(-180deg); animation: rotate-icon-4 20s linear infinite; background: #ff9900a5; }
-.spoke:nth-child(5) { transform: rotate(240deg) translate(var(--orbit-distance)) rotate(-240deg); animation: rotate-icon-5 20s linear infinite; background: #89ff03a4; }
-.spoke:nth-child(6) { transform: rotate(300deg) translate(var(--orbit-distance)) rotate(-300deg); animation: rotate-icon-6 20s linear infinite; background: #008cffac; }
+.spoke:nth-child(1) { transform: rotate(0deg) translate(var(--orbit-distance)) rotate(0deg); animation: rotate-icon-1 20s linear infinite; background: #dbc73b; }
+.spoke:nth-child(2) { transform: rotate(60deg) translate(var(--orbit-distance)) rotate(-60deg); animation: rotate-icon-2 20s linear infinite; background: #d6ecf6; }
+.spoke:nth-child(3) { transform: rotate(120deg) translate(var(--orbit-distance)) rotate(-120deg); animation: rotate-icon-3 20s linear infinite; background: #fd7373; }
+.spoke:nth-child(4) { transform: rotate(180deg) translate(var(--orbit-distance)) rotate(-180deg); animation: rotate-icon-4 20s linear infinite; background: #adadd2; }
+.spoke:nth-child(5) { transform: rotate(240deg) translate(var(--orbit-distance)) rotate(-240deg); animation: rotate-icon-5 20s linear infinite; background: #bde13e; }
+.spoke:nth-child(6) { transform: rotate(300deg) translate(var(--orbit-distance)) rotate(-300deg); animation: rotate-icon-6 20s linear infinite; background: #046490; }
 
 /* 6. Orbit Animation */
 @keyframes rotate-hub {
@@ -153,9 +153,9 @@ body {
 
 /* Individual Spoke Hover Styles */
 .spoke:hover {
-    background-color: #ff007b !important; 
+    background-color: #f4524d !important; 
     scale: 1.2;                
-    box-shadow: 0 0 30px #ff007b; 
+    box-shadow: 0 0 30px #f4524d; 
     transition: all 0.5s ease;  
     z-index: 50; 
 }
